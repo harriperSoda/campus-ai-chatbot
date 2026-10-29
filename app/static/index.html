@@ -3,106 +3,132 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-    <title>Kempton Campus Assistant</title>
-
-    <link rel="stylesheet" href="/static/styles.css">
+    <title>Campus Assistant | BC Kempton Park</title>
+    <link rel="stylesheet" href="/static/styles.css?v=2">
 </head>
 
 <body>
-    <main class="chat-app">
-        <header class="chat-header">
-            <div class="assistant-icon">KC</div>
-
-            <div>
-                <h1>Campus Support Assistant</h1>
-                <p>Kempton Park Campus</p>
-            </div>
-
-            <span id="connectionStatus" class="status">Ready</span>
-        </header>
-
-        <section class="user-section">
-            <label for="userId">Demo user ID</label>
-            <input
-                id="userId"
-                type="text"
-                value="603758"
-                autocomplete="off"
-            >
-        </section>
-
-        <section
-            id="messages"
-            class="messages"
-            aria-live="polite"
-        >
-            <div class="message assistant-message">
-                <div class="message-label">Campus Assistant</div>
-
-                <div class="message-bubble">
-                    Hello! I can help you check campus notices, safety
-                    risks, email summaries, staff contacts and support
-                    tickets. What would you like to know?
+    <div class="app-shell">
+        <aside class="sidebar">
+            <div class="sidebar-brand">
+                <div class="brand-mark">
+    <img src="/static/campus-logo.jpg" alt="BC Kempton Park logo">
+</div>
+                <div>
+                    <strong>BC Kempton Park</strong>
+                    <span>Campus support</span>
                 </div>
             </div>
-        </section>
 
-        <section class="quick-actions" aria-label="Suggested questions">
-            <button
-                type="button"
-                class="quick-action"
-                data-message="What active campus notices are available?"
+            <div class="sidebar-section">
+                <div class="sidebar-current">Chat</div>
+            </div>
+
+            <div class="sidebar-spacer"></div>
+
+            <div class="user-section">
+                <label for="userId">Demo user ID</label>
+                <input
+                    id="userId"
+                    type="text"
+                    value="603758"
+                    autocomplete="off"
+                >
+            </div>
+        </aside>
+
+        <main class="chat-main">
+            <header class="chat-header">
+                <div>
+                    <p class="header-eyebrow">STUDENT SUPPORT</p>
+                    <h1>Campus Assistant</h1>
+                    <p class="header-subtitle">
+                        Ask about campus services and updates
+                    </p>
+                </div>
+
+                <span id="connectionStatus" class="status" role="status">
+                    Ready
+                </span>
+            </header>
+
+            <section
+                id="messages"
+                class="messages"
+                aria-label="Chat messages"
+                aria-live="polite"
             >
-                Campus notices
-            </button>
+                <div class="message assistant-message">
+                    <div class="message-label">Campus Assistant</div>
+                    <div class="message-bubble">
+                        Hi! I can help with campus notices, safety risks,
+                        staff contacts, email summaries, the academic calendar,
+                        and demo support tickets. What would you like to know?
+                    </div>
+                </div>
+            </section>
 
-            <button
-                type="button"
-                class="quick-action"
-                data-message="Are there any active campus safety risks?"
-            >
-                Safety risks
-            </button>
+            <div class="chat-bottom">
+                <section
+                    class="quick-actions"
+                    aria-label="Suggested questions"
+                >
+                    <button
+                        type="button"
+                        class="quick-action"
+                        data-message="What active campus notices are available?"
+                    >
+                        Campus notices
+                    </button>
 
-            <button
-                type="button"
-                class="quick-action"
-                data-message="Summarize the recent campus emails."
-            >
-                Email summaries
-            </button>
+                    <button
+                        type="button"
+                        class="quick-action"
+                        data-message="Are there any active campus safety risks?"
+                    >
+                        Safety risks
+                    </button>
 
-            <button
-                type="button"
-                class="quick-action"
-                data-message="Who can help me with registration?"
-            >
-                Staff directory
-            </button>
-        </section>
+                    <button
+                        type="button"
+                        class="quick-action"
+                        data-message="Who can help me with registration?"
+                    >
+                        Staff contacts
+                    </button>
 
-        <form id="chatForm" class="message-form">
-            <label for="messageInput" class="visually-hidden">
-                Type your message
-            </label>
+                    <button
+                        type="button"
+                        class="quick-action"
+                        data-message="What happens on 1 January 2026?"
+                    >
+                        Calendar
+                    </button>
+                </section>
 
-            <textarea
-                id="messageInput"
-                rows="1"
-                placeholder="Ask the campus assistant..."
-                required
-            ></textarea>
+                <form id="chatForm" class="message-form">
+                    <label for="messageInput" class="visually-hidden">
+                        Type your message
+                    </label>
 
-            <button id="sendButton" type="submit">
-                Send
-            </button>
-        </form>
+                    <textarea
+                        id="messageInput"
+                        rows="1"
+                        placeholder="Ask the Campus Assistant..."
+                        required
+                    ></textarea>
 
-        <p class="keyboard-hint">
-            Press Enter to send. Use Shift + Enter for a new line.
-        </p>
-    </main>
+                    <button id="sendButton" type="submit">
+                        Send
+                    </button>
+                </form>
+
+                <p class="keyboard-hint">
+                    Press Enter to send · Shift+Enter for a new line
+                </p>
+            </div>
+        </main>
+    </div>
 
     <script src="/static/chat.js"></script>
 </body>
