@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Campus Assistant | BC Kempton Park</title>
-    <link rel="stylesheet" href="/static/styles.css?v=2">
+    <link rel="stylesheet" href="/static/styles.css?v=4">
 </head>
 
 <body>
@@ -12,8 +12,8 @@
         <aside class="sidebar">
             <div class="sidebar-brand">
                 <div class="brand-mark">
-    <img src="/static/campus-logo.jpg" alt="BC Kempton Park logo">
-</div>
+                    <img src="/static/campus-logo.jpg" alt="BC Kempton Park logo">
+                </div>
                 <div>
                     <strong>BC Kempton Park</strong>
                     <span>Campus support</span>
@@ -63,7 +63,8 @@
                     <div class="message-bubble">
                         Hi! I can help with campus notices, safety risks,
                         staff contacts, email summaries, the academic calendar,
-                        and demo support tickets. What would you like to know?
+                        demo support tickets, and questions about uploaded PDFs.
+                        What would you like to know?
                     </div>
                 </div>
             </section>
@@ -107,6 +108,33 @@
                 </section>
 
                 <form id="chatForm" class="message-form">
+                    <input
+                        id="pdfFile"
+                        class="visually-hidden"
+                        type="file"
+                        accept=".pdf,application/pdf"
+                    >
+
+                    <button
+                        id="attachPdfButton"
+                        class="attach-button"
+                        type="button"
+                        title="Attach a PDF"
+                        aria-label="Attach a PDF"
+                    >
+                        <svg
+                            viewBox="0 0 24 24"
+                            fill="none"
+                            stroke="currentColor"
+                            stroke-width="2"
+                            stroke-linecap="round"
+                            stroke-linejoin="round"
+                            aria-hidden="true"
+                        >
+                            <path d="M21.44 11.05 12.25 20.24a6 6 0 0 1-8.49-8.49l9.19-9.19a4 4 0 0 1 5.66 5.66l-9.2 9.19a2 2 0 0 1-2.82-2.83l8.49-8.48"/>
+                        </svg>
+                    </button>
+
                     <label for="messageInput" class="visually-hidden">
                         Type your message
                     </label>
@@ -123,6 +151,10 @@
                     </button>
                 </form>
 
+                <span id="pdfStatus" class="visually-hidden" role="status">
+                    No PDF uploaded
+                </span>
+
                 <p class="keyboard-hint">
                     Press Enter to send · Shift+Enter for a new line
                 </p>
@@ -130,6 +162,6 @@
         </main>
     </div>
 
-    <script src="/static/chat.js"></script>
+    <script src="/static/chat.js?v=3"></script>
 </body>
 </html>
