@@ -5,8 +5,12 @@ const messages = document.getElementById("messages");
 const sendButton = document.getElementById("sendButton");
 const connectionStatus = document.getElementById("connectionStatus");
 const quickActionButtons = document.querySelectorAll(".quick-action");
+const pdfFileInput = document.getElementById("pdfFile");
+const attachPdfButton = document.getElementById("attachPdfButton");
+const pdfStatus = document.getElementById("pdfStatus");
 
 let requestInProgress = false;
+const maxPdfSize = 10 * 1024 * 1024;
 
 
 function addFormattedText(element, text) {
@@ -62,6 +66,8 @@ function setLoading(isLoading) {
     sendButton.disabled = isLoading;
     messageInput.disabled = isLoading;
     userIdInput.disabled = isLoading;
+    pdfFileInput.disabled = isLoading;
+    attachPdfButton.disabled = isLoading;
 
     quickActionButtons.forEach((button) => {
         button.disabled = isLoading;
@@ -74,6 +80,64 @@ function setLoading(isLoading) {
         connectionStatus.textContent = "Ready";
         connectionStatus.className = "status";
         messageInput.focus();
+    }
+}
+
+
+async function uploadPdf(file) {
+    const userId = userIdInput.value.trim();
+
+    if (!userId) {
+        addMessage(
+            "assistant",
+            "Please enter a demo user ID before attaching a PDF.",
+            true
+        );
+        return;
+    }
+
+    if (!file.name.toLowerCase().endsWith(".pdf")) {
+        addMessage("assistant", "Please choose a PDF file.", true);
+        return;
+    }
+
+    if (file.size > maxPdfSize) {
+        addMessage("assistant", "PDF files must be 10 MB or smaller.", true);
+        return;
+    }
+
+    setLoading(true);
+    connectionStatus.textContent = "Uploading...";
+    pdfStatus.textContent = "Uploading PDF";
+
+    try {
+        const formData = new FormData();
+        formData.append("user_id", userId);
+        formData.append("pdf_file", file);
+
+        const response = await fetch("/documents/pdf", {
+            method: "POST",
+            body: formData
+        });
+        const data = await response.json();
+
+        if (!response.ok) {
+            throw new Error(
+                data.detail || `The server returned status ${response.status}.`
+            );
+        }
+
+        pdfStatus.textContent = `${data.filename} ready`;
+        addMessage(
+            "assistant",
+            `${data.filename} is ready to search. Ask me a question about it.`
+        );
+    } catch (error) {
+        console.error(error);
+        pdfStatus.textContent = "PDF upload failed";
+        addMessage("assistant", error.message, true);
+    } finally {
+        setLoading(false);
     }
 }
 
@@ -99,7 +163,6 @@ async function sendMessage(messageText) {
             "Please enter a demo user ID before sending a message.",
             true
         );
-
         return;
     }
 
@@ -151,6 +214,23 @@ async function sendMessage(messageText) {
 chatForm.addEventListener("submit", (event) => {
     event.preventDefault();
     sendMessage(messageInput.value);
+});
+
+
+attachPdfButton.addEventListener("click", () => {
+    if (!requestInProgress) {
+        pdfFileInput.click();
+    }
+});
+
+
+pdfFileInput.addEventListener("change", () => {
+    const file = pdfFileInput.files[0];
+    pdfFileInput.value = "";
+
+    if (file && !requestInProgress) {
+        uploadPdf(file);
+    }
 });
 
 

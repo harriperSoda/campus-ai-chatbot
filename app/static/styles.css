@@ -541,3 +541,93 @@ button {
         padding: 0 11px;
     }
 }
+
+/* PDF upload bar */
+
+.pdf-upload-form {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 10px;
+    flex: 0 0 auto;
+    padding: 12px var(--content-padding);
+    border-bottom: 1px solid var(--border);
+    background: var(--surface);
+}
+
+.pdf-upload-form label {
+    color: var(--muted);
+    font-size: 0.8rem;
+    font-weight: 700;
+}
+
+.pdf-upload-form input {
+    flex: 1 1 180px;
+    min-width: 0;
+}
+
+.pdf-upload-form button {
+    padding: 9px 14px;
+    border: 0;
+    border-radius: 9px;
+    color: white;
+    background: var(--blue);
+    font-weight: 700;
+}
+
+.pdf-upload-form button:hover {
+    background: var(--blue-dark);
+}
+
+.pdf-upload-form button:disabled {
+    cursor: not-allowed;
+    opacity: 0.55;
+}
+
+#pdfStatus {
+    color: var(--muted);
+    font-size: 0.75rem;
+}
+
+@media (max-width: 850px) {
+    .pdf-upload-form {
+        padding: 12px 22px;
+    }
+}
+
+@media (max-width: 560px) {
+    .pdf-upload-form {
+        padding: 10px 16px;
+    }
+
+    .pdf-upload-form label,
+    #pdfStatus {
+        flex-basis: 100%;
+    }
+}
+
+/* Paperclip button inside the message box */
+
+.message-form .attach-button {
+    display: grid;
+    place-items: center;
+    flex: 0 0 44px;
+    min-width: 44px;
+    width: 44px;
+    height: 44px;
+    padding: 0;
+    border: 0;
+    border-radius: 11px;
+    color: var(--muted);
+    background: transparent;
+}
+
+.message-form .attach-button:hover {
+    color: var(--blue-dark);
+    background: #edf5fd;
+}
+
+.message-form .attach-button svg {
+    width: 20px;
+    height: 20px;
+}
